@@ -75,7 +75,7 @@ const Footer = () => {
             </p>
             <div className='flex items-center gap-3 mt-4'>
               {socialLinks.map((link, index)=>(
-                <Link to={link.path} key={index} className='w-9 h-9 border border-solid border-[#181A1E] rounded-full flex items-center justify-center group hover:bg-primaryColor hover:border-none'>
+                <Link to={link.path} target='_blank' key={index} className='w-9 h-9 border border-solid border-[#181A1E] rounded-full flex items-center justify-center group hover:bg-primaryColor hover:border-none'>
                   {link.icon}
                 </Link>
               ))}

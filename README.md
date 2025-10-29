@@ -1,4 +1,5 @@
 MediHub - Find Your Doctor
+
 • Developed an online platform where patients can easily search for doctors and book appointments, eliminating the need for phone calls or in-person visits.
 
 • Developed an AI-powered system that suggests appropriate doctors based on user-reported symptoms.

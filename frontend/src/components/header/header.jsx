@@ -6,12 +6,16 @@ import { authContext } from '../../context/authContext.jsx'
 
 const navLinks = [
   {
-    path: '/home',
+    path: '/',
     display: 'Home'
   },
   {
     path: '/doctors',
-    display: 'Find a Doctor'
+    display: 'Doctors'
+  },
+  {
+    path: '/doctors-ai',
+    display: 'Find doctors using AI'
   },
   {
     path: '/services',

@@ -127,7 +127,7 @@ const Profile = ({doctorData}) => {
 
     const addTimeSlot = (e)=>{
         e.preventDefault()
-        addItem('timeSlots', {startingTime:'', endingTime:'', day:''})
+        addItem('timeSlots', {startingTime:'', endingTime:'', day:'', hospitalOrClinicName:''})
     }
 
     const handleTimeSlotChange = (event, index)=>{
@@ -298,6 +298,10 @@ const Profile = ({doctorData}) => {
                                 <div>
                                     <p className="form-label">Ending Time*</p>
                                     <input type="time"  name="endingTime" value={item.endingTime} className="form-input" onChange={e => handleTimeSlotChange(e,index)}/>
+                                </div>
+                                <div>
+                                    <p className="form-label">Hospital/Clinic Name*</p>
+                                    <input type="text"  name="hospitalOrClinicName" value={item.hospitalOrClinicName} className="form-input" onChange={e => handleTimeSlotChange(e,index)}/>
                                 </div>
                                 <div className="flex items-center">
                                     <button onClick={e => deleteTimeSlot(e, index)} className="bg-red-600 p-2 rounded-full text-white text-[18px] mt-6 cursor-pointer">

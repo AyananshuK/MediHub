@@ -1,6 +1,30 @@
+import { useNavigate } from "react-router-dom"
 import convertTime from "../../utils/convertTime.js"
+import {BASE_URL, token} from './../../config.js'
+import {toast} from 'react-toastify'
 
 const SlidePanel = ({doctorId, ticketPrice, timeSlots}) => {
+
+    const navigate = useNavigate();
+
+    const bookingHandler = async()=>{
+        try {
+            const res = await fetch(`${BASE_URL}/bookings/checkout/${doctorId}`,{
+                method: 'post',
+                headers:{
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            const data = await res.json()
+            if(!res.ok){
+                throw new Error(data.message)
+            }
+            navigate("/checkout-success");
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
   return (
     <div>
       <div className='shadow-panelShadow p-3 lg:p-5 rounded-md'>
@@ -21,6 +45,9 @@ const SlidePanel = ({doctorId, ticketPrice, timeSlots}) => {
                 {timeSlots?.map((timeSlot, index)=>(
                     <li key={index} className='flex items-center justify-between mb-2'> 
                         <p className='text-[15px] leading-6 text-textColor font-semibold'>
+                            <b>{timeSlot.hospitalOrClinicName}</b>
+                        </p>
+                        <p className='text-[15px] leading-6 text-textColor font-semibold'>
                             {timeSlot.day.charAt(0).toUpperCase() + timeSlot.day.slice(1)}
                         </p>
                         <p className='text-[15px] leading-6 text-textColor font-semibold'>
@@ -30,7 +57,7 @@ const SlidePanel = ({doctorId, ticketPrice, timeSlots}) => {
                 ))}
             </ul>
         </div>
-        <button className='btn px-2 w-full rounded-md'>
+        <button onClick={bookingHandler} className='btn px-2 w-full rounded-md'>
             Book Appointment
         </button>
       </div>

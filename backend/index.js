@@ -24,9 +24,9 @@ app.get('/',(req,res)=>{
 
 //database
 mongoose.set('strictQuery', false)
-const connectDB = ()=>{
+const connectDB = async ()=>{
     try{
-        mongoose.connect(process.env.mongo_url,{
+        await mongoose.connect(process.env.mongo_url,{
             useNewUrlParser: true,
             useUnifiedTopology: true
         })
@@ -49,9 +49,15 @@ app.use('/api/v1/reviews', reviewRoute)
 app.use('/api/v1/bookings', bookingRoute)
 
 
+const startServer = async () => {
+  try {
+    await connectDB();
+    app.listen(port, () => {
+      console.log(`Backend server is running on http://localhost:${port}`);
+    });
+  } catch (err) {
+    console.error("Failed to connect to the database. Server is not starting.");
+  }
+};
 
-
-app.listen(port, ()=>{
-    connectDB()
-    console.log('Server is running on port:'+port)
-})
+startServer();
